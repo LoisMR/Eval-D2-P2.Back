@@ -12,7 +12,7 @@ var host = new HostBuilder()
         services.ConfigureFunctionsApplicationInsights();
         services.AddDbContext<EvalDbContext>(options =>
         {
-            options.UseSqlServer("Server=localhost;Database=Eval-D2-P2;Trusted_Connection=True;");
+            options.UseSqlServer("Server=localhost;Database=Eval-D2-P2;Trusted_Connection=True;TrustServerCertificate=true;");
         });
     })
     .Build();
