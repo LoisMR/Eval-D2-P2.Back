@@ -25,9 +25,14 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Eval-D2-P2.DAL\Eval-D2-P2.DAL.csproj" />
+    <ProjectReference Include="..\Eval-D2-P2.Repository.Contracts\Eval-D2-P2.Repository.Contracts.csproj" />
+    <ProjectReference Include="..\Eval-D2-P2.Repository\Eval-D2-P2.Repository.csproj" />
+    <ProjectReference Include="..\Eval-D2-P2.Service.Contracts\Eval-D2-P2.Service.Contracts.csproj" />
+    <ProjectReference Include="..\Eval-D2-P2.Service\Eval-D2-P2.Service.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">
