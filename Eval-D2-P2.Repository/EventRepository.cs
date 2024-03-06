@@ -20,6 +20,23 @@ namespace Eval_D2_P2.Repository
             await this._context.SaveChangesAsync();
         }
 
+        public async Task<bool> Delete(Guid id)
+        {
+            var eventToDelete = await this._context.Events.FindAsync(id);
+
+            if (eventToDelete == null)
+            {
+                return false;
+            }
+            else
+            {
+                this._context.Events.Remove(eventToDelete);
+                await this._context.SaveChangesAsync();
+
+                return true;
+            }
+        }
+
         public async Task<IEnumerable<Event>> GetAll() 
             => await this._context.Events.ToListAsync();
 

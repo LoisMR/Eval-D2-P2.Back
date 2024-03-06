@@ -1,4 +1,6 @@
+using Azure;
 using Eval_D2_P2.Service.Contracts;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Newtonsoft.Json;
@@ -6,17 +8,16 @@ using System.Net;
 
 namespace Eval_D2_P2.API.Event
 {
-    public class EventPutFunction
+    public class EventDeleteFunction
     {
         private readonly IEventService _eventService;
-
-        public EventPutFunction(IEventService eventService)
+        public EventDeleteFunction(IEventService eventService)
         {
             _eventService = eventService;
         }
 
-        [Function("EventPutFunction")]
-        public async Task<HttpResponseData> Update([HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "events/{id}")] 
+        [Function("EventDeleteFunction")]
+        public async Task<HttpResponseData> DeleteEvent([HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "events/{id}")]
         HttpRequestData req,
         Guid id)
         {
@@ -25,18 +26,12 @@ namespace Eval_D2_P2.API.Event
 
             try
             {
-                var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-                var newEvent = JsonConvert.DeserializeObject<Entity.Event>(requestBody);
+                var result = await this._eventService.Delete(id);
 
-                if (newEvent != null)
+                if (!result)
                 {
-                    var result = await this._eventService.Update(newEvent, id);
-
-                    if (!result)
-                    {
-                        await response.WriteStringAsync($"Event id not found : {id}");
-                        response.StatusCode = HttpStatusCode.NotFound;
-                    }
+                    await response.WriteStringAsync($"Event id not found : {id}");
+                    response.StatusCode = HttpStatusCode.NotFound;
                 }
             }
             catch (JsonException e)

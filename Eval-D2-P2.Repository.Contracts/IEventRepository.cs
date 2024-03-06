@@ -9,5 +9,7 @@ namespace Eval_D2_P2.Repository.Contracts
         public Task<IEnumerable<Event>> GetAll();
 
         public Task<bool> Update(Event entity, Guid id);
+
+        Task<bool> Delete(Guid id);
     }
 }
