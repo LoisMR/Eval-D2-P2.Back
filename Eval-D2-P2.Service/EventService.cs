@@ -16,5 +16,7 @@ namespace Eval_D2_P2.Service
         public Task Add(Event entity) => this._eventRepository.Add(entity);
 
         public Task<IEnumerable<Event>> GetAll() => this._eventRepository.GetAll();
+
+        public Task<bool> Update(Event entity, Guid id) => this._eventRepository.Update(entity, id);
     }
 }

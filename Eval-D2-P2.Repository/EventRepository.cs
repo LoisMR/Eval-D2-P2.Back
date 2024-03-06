@@ -2,6 +2,7 @@
 using Eval_D2_P2.Entity;
 using Eval_D2_P2.Repository.Contracts;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Eval_D2_P2.Repository
 {
@@ -21,5 +22,27 @@ namespace Eval_D2_P2.Repository
 
         public async Task<IEnumerable<Event>> GetAll() 
             => await this._context.Events.ToListAsync();
+
+        public async Task<bool> Update(Event entity, Guid id)
+        {
+            var theEvent = await this._context.Events.FindAsync(id);
+
+            if (theEvent == null)
+            {
+                return false;
+            }
+            else
+            {
+                theEvent.Title = entity.Title;
+                theEvent.Description = entity.Description;
+                theEvent.Date = entity.Date;
+                theEvent.Location = entity.Location;
+
+                await this._context.SaveChangesAsync();
+
+                return true;
+            }
+        }
+
     }
 }
