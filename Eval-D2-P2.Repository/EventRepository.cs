@@ -1,6 +1,7 @@
 ﻿using Eval_D2_P2.DAL;
 using Eval_D2_P2.Entity;
 using Eval_D2_P2.Repository.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Eval_D2_P2.Repository
 {
@@ -17,5 +18,8 @@ namespace Eval_D2_P2.Repository
             this._context.Add(entity);
             await this._context.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<Event>> GetAll() 
+            => await this._context.Events.ToListAsync();
     }
 }

@@ -17,7 +17,7 @@ namespace Eval_D2_P2.API.Event
         }
 
         [Function("EventPostFunction")]
-        public async Task<HttpResponseData> AddEvent([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "events")] HttpRequestData req)
+        public async Task<HttpResponseData> Add([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "events")] HttpRequestData req)
         {
             var response = req.CreateResponse(HttpStatusCode.Created);
             response.Headers.Add("Content-Type", "application/json; charset=utf-8");
@@ -40,7 +40,7 @@ namespace Eval_D2_P2.API.Event
             catch (Exception e)
             {
                 await response.WriteStringAsync(e.Message);
-                response.StatusCode = HttpStatusCode.InternalServerError;
+                response.StatusCode = HttpStatusCode.NotFound;
             }
 
             return response;
