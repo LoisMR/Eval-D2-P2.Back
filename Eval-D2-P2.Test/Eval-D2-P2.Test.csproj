@@ -18,4 +18,9 @@
     <PackageReference Include="coverlet.collector" Version="3.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Eval-D2-P2.DAL\Eval-D2-P2.DAL.csproj" />
+    <ProjectReference Include="..\Eval-D2-P2.Service\Eval-D2-P2.Service.csproj" />
+  </ItemGroup>
+
 </Project>
